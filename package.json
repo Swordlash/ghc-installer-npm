@@ -1,0 +1,30 @@
+{
+  "name": "@haskell-org/ghcup-npm",
+  "version": "0.1.0",
+  "description": "NPM wrapper for ghcup",
+  "bin": "index.js",
+  "main": "ghcup.js",
+  "scripts": {
+    "postinstall": "node install-ghcup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swordlash/ghcup-npm.git"
+  },
+  "keywords": [
+    "ghc",
+    "haskell",
+    "ghcup",
+    "installer"
+  ],
+  "author": "Mateusz Goślinowski",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Swordlash/ghcup-npm/issues"
+  },
+  "homepage": "https://github.com/Swordlash/ghcup-npm#readme",
+  "dependencies": {
+    "commander": "^13.0.0",
+    "execa": "^9.5.2"
+  }
+}
