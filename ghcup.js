@@ -17,7 +17,7 @@ async function run(component, args) {
     process.exit(1);
   }
 
-  await execa(bin, args, { stdio: 'inherit', env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } }).then(({ stdout }) => console.log(stdout));
+  await execa(bin, args, { stdio: 'inherit', env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } });
 }
 
 async function install(component, version) {
@@ -31,15 +31,15 @@ async function install(component, version) {
     }
 
     console.log(`Activating Emscripten SDK ${emsdk_version}`);
-    await execa('emsdk', ['install', emsdk_version], { stdio: 'inherit' }).then(({ stdout }) => console.log(stdout));
-    await execa('emsdk', ['activate', emsdk_version], { stdio: 'inherit' }).then(({ stdout }) => console.log(stdout));
+    await execa('emsdk', ['install', emsdk_version], { stdio: 'inherit' });
+    await execa('emsdk', ['activate', emsdk_version], { stdio: 'inherit' });
 
     console.log(`Installing ${component} ${version}`);
-    await execa('emconfigure', [ghcupBin, 'install', component, '--set', "javascript-unknown-ghcjs-" + version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } }).then(({ stdout }) => console.log(stdout));
+    await execa('emconfigure', [ghcupBin, 'install', component, '--set', "javascript-unknown-ghcjs-" + version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
   }
   else {
     console.log(`Installing ${component} ${version}`);    
-    await execa(ghcupBin, ['install', component, version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } }).then(({ stdout }) => console.log(stdout));
+    await execa(ghcupBin, ['install', component, version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
   }
 }
 

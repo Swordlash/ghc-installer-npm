@@ -13,9 +13,7 @@ async function installGhcup() {
   }
 
   const installScript = join(ghcupDir, 'install-ghcup.sh');
-  const scriptResponse = await execa('curl', ['-sSL', GHCUP_INSTALL_SCRIPT_URL], {
-    stdio: 'pipe',
-  });
+  const scriptResponse = await execa('curl', ['-sSL', GHCUP_INSTALL_SCRIPT_URL]);
 
   writeFileSync(installScript, scriptResponse.stdout);
   chmodSync(installScript, 0o755);
@@ -28,14 +26,14 @@ async function installGhcup() {
     BOOTSTRAP_HASKELL_NONINTERACTIVE: '1',
     BOOTSTRAP_HASKELL_MINIMAL: '1',
     },
-  }).then(({ stdout }) => console.log(stdout));
+  });
 
   await execa(join(ghcupDir, '.ghcup/bin/ghcup'), ['config', 'add-release-channel', 'cross'], {
     stdio: 'inherit',
     env: {
       GHCUP_INSTALL_BASE_PREFIX: ghcupDir
     }
-  }).then(({ stdout }) => console.log(stdout));
+  });
 
   console.log(`ghcup installed locally at ${ghcupDir}`);
 }
