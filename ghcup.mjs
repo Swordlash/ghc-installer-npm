@@ -1,27 +1,27 @@
-const { execa } = require('execa');
-const { resolve, join } = require('path');
-const { existsSync } = require('fs');
-const _ = require('lodash');
+import { execa } from 'execa';
+import { resolve, join } from 'path';
+import { existsSync } from 'fs';
+import lodash from 'lodash';
 
-const ghcupDir = resolve(__dirname);
-const ghcupBin = join(__dirname, '.ghcup/bin/ghcup');
+const ghcupDir = resolve(import.meta.dirname);
+const ghcupBin = join(import.meta.dirname, '.ghcup/bin/ghcup');
 
 const emsdk_mapping = {
   "9.12.1": "3.1.74"
 }
 
-async function run(component, args = [], opts = {}) {
-  const ghcupBinDir = join(__dirname, '.ghcup/bin/');
+export async function run(component, args = [], opts = {}) {
+  const ghcupBinDir = join(import.meta.dirname, '.ghcup/bin/');
   const bin = join(ghcupBinDir, component);
   if (!existsSync(bin)) {
     console.error(`${component} not installed, use ghcup-npm install ${component} <version> first`);
     process.exit(1);
   }
 
-  return execa(bin, args, _.merge({ env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } }, opts));
+  return execa(bin, args, lodash.merge({ env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } }, opts));
 }
 
-async function install(component, version) {
+export async function install(component, version) {
   console.log(`Installing ${component} ${version} using ghcup at ${ghcupDir}`);
 
   if (component == 'ghc') {
@@ -43,5 +43,3 @@ async function install(component, version) {
     return execa(ghcupBin, ['install', component, version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
   }
 }
-
-module.exports = { install, run };

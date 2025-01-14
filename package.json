@@ -1,11 +1,11 @@
 {
   "name": "@haskell-org/ghc-installer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "NPM wrapper for ghcup",
-  "bin": "index.js",
-  "main": "ghcup.js",
+  "bin": "index.mjs",
+  "main": "ghcup.mjs",
   "scripts": {
-    "postinstall": "node install-ghcup.js"
+    "postinstall": "node install-ghcup.mjs"
   },
   "repository": {
     "type": "git",

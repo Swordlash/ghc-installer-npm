@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const { execa } = require('execa');
-const { resolve, join } = require('path');
-const { existsSync, mkdirSync, writeFileSync, chmodSync } = require('fs');
+import { execa } from 'execa';
+import { resolve, join } from 'path';
+import { existsSync, mkdirSync, writeFileSync, chmodSync } from 'fs';
 
 const GHCUP_INSTALL_SCRIPT_URL = 'https://get-ghcup.haskell.org';
 
 async function installGhcup() {
-  const ghcupDir = resolve(__dirname);
+  const ghcupDir = resolve(import.meta.dirname);
   if (!existsSync(ghcupDir)) {
     mkdirSync(ghcupDir, { recursive: true });
   }

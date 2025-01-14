@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { program } = require('commander');
-const { version } = require('./package.json');
-const { install, run } = require('./ghcup');
+import { program } from 'commander';
+import { version } from './package.json';
+import { install, run } from './ghcup';
 
 program
   .name('ghc-installer')
