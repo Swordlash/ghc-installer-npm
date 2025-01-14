@@ -1,6 +1,7 @@
 const { execa } = require('execa');
 const { resolve, join } = require('path');
 const { existsSync } = require('fs');
+const _ = require('lodash');
 
 const ghcupDir = resolve(__dirname);
 const ghcupBin = join(__dirname, '.ghcup/bin/ghcup');
@@ -9,7 +10,7 @@ const emsdk_mapping = {
   "9.12.1": "3.1.74"
 }
 
-async function run(component, args) {
+async function run(component, args = [], opts = {}) {
   const ghcupBinDir = join(__dirname, '.ghcup/bin/');
   const bin = join(ghcupBinDir, component);
   if (!existsSync(bin)) {
@@ -17,7 +18,7 @@ async function run(component, args) {
     process.exit(1);
   }
 
-  await execa(bin, args, { stdio: 'inherit', env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } });
+  return execa(bin, args, _.merge({ env: { PATH: `${ghcupBinDir}:${process.env.PATH}` } }, opts));
 }
 
 async function install(component, version) {
@@ -35,11 +36,11 @@ async function install(component, version) {
     await execa('emsdk', ['activate', emsdk_version], { stdio: 'inherit' });
 
     console.log(`Installing ${component} ${version}`);
-    await execa('emconfigure', [ghcupBin, 'install', component, '--set', "javascript-unknown-ghcjs-" + version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
+    return execa('emconfigure', [ghcupBin, 'install', component, '--set', "javascript-unknown-ghcjs-" + version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
   }
   else {
     console.log(`Installing ${component} ${version}`);    
-    await execa(ghcupBin, ['install', component, version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
+    return execa(ghcupBin, ['install', component, version], { stdio: 'inherit', env: { GHCUP_INSTALL_BASE_PREFIX: ghcupDir } });
   }
 }
 

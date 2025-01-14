@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Swordlash/ghc-installer-npm#readme",
   "dependencies": {
     "commander": "^13.0.0",
-    "execa": "^9.5.2"
+    "execa": "^9.5.2",
+    "lodash": "^4.17.21"
   }
 }

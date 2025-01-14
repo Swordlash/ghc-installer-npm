@@ -5,7 +5,7 @@ const { version } = require('./package.json');
 const { install, run } = require('./ghcup');
 
 program
-  .name('ghcup-npm')
+  .name('ghc-installer')
   .description('An NPM wrapper for managing GHC, Cabal, and Stack via ghcup')
   .version(version);
 
