@@ -2,7 +2,7 @@
 
 import { program } from 'commander';
 import { version } from './package.json';
-import { install, run } from './ghcup';
+import { install, run } from './ghcup.mjs';
 
 program
   .name('ghc-installer')
