@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { version } from './package.json' assert { type: 'json' };
+import pkg from './package.json' assert { type: 'json' };
 import { install, run } from './ghcup.mjs';
 
 program
   .name('ghc-installer')
   .description('An NPM wrapper for managing GHC, Cabal, and Stack via ghcup')
-  .version(version);
+  .version(pkg.version);
 
 program
   .command('install <component> [version]')

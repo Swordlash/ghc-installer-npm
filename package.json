@@ -1,6 +1,6 @@
 {
   "name": "@haskell-org/ghc-installer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "NPM wrapper for ghcup",
   "bin": "index.mjs",
   "main": "ghcup.mjs",
