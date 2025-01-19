@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { version } from './package.json';
+import { version } from './package.json' assert { type: 'json' };
 import { install, run } from './ghcup.mjs';
 
 program
